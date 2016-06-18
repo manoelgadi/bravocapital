@@ -156,7 +156,7 @@ def execute_model(option_of_model):
     plt.show()
 
 
-class faGroupAClass():
+class Run:
     def __init__(self):
         model_selected = ""
         while model_selected != "q":
@@ -178,5 +178,7 @@ class faGroupAClass():
 
             if model_selected in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]:
                 execute_model(model_selected)
+            elif model_selected == "q":
+                print("Hope it has been helpful, enjoy data science! bye!")
             else:
                 print("Invalid option selected, please introduce the number of the option")
