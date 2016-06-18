@@ -156,26 +156,25 @@ def execute_model(option_of_model):
     plt.show()
 
 
-def load_model_tester():
-    model_selected = ""
-    while model_selected != "q":
-        print("Please indicate which model you would like to use:")
-        print("    1) Generalized Linear Models: Ordinary Least Squares")
-        print("    2) Generalized Linear Models: Ridge Regression")
-        print("    3) Generalized Linear Models: Lasso")
-        print("    4) Generalized Linear Models: LARS Lasso")
-        print("    5) Generalized Linear Models: Bayesian Ridge Regression")
-        print("    6) Generalized Linear Models: Logistic regression")
-        print("    7) Generalized Linear Models: Perceptron")
-        print("    8) Kernel ridge regression")
-        print("    9) Support Vector Machines: Single-class classification")
-        print("    10) Support Vector Machines: Multi-class classification")
-        print("    11) Generalized Linear Models: Regression")
-        print("    12) Generalized Linear Models: Kernel functions, rbf")
+model_selected = ""
+while model_selected != "q":
+    print("Please indicate which model you would like to use:")
+    print("    1) Generalized Linear Models: Ordinary Least Squares")
+    print("    2) Generalized Linear Models: Ridge Regression")
+    print("    3) Generalized Linear Models: Lasso")
+    print("    4) Generalized Linear Models: LARS Lasso")
+    print("    5) Generalized Linear Models: Bayesian Ridge Regression")
+    print("    6) Generalized Linear Models: Logistic regression")
+    print("    7) Generalized Linear Models: Perceptron")
+    print("    8) Kernel ridge regression")
+    print("    9) Support Vector Machines: Single-class classification")
+    print("    10) Support Vector Machines: Multi-class classification")
+    print("    11) Generalized Linear Models: Regression")
+    print("    12) Generalized Linear Models: Kernel functions, rbf")
 
-        model_selected = input("Select option(\"q\" to exit): ")
+    model_selected = input("Select option(\"q\" to exit): ")
 
-        if model_selected in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]:
-            execute_model(model_selected)
-        else:
-            print("Invalid option selected, please introduce the number of the option")
+    if model_selected in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]:
+        execute_model(model_selected)
+    else:
+        print("Invalid option selected, please introduce the number of the option")
