@@ -156,7 +156,7 @@ def execute_model(option_of_model):
     plt.show()
 
 
-class Run:
+class run:
     def __init__(self):
         model_selected = ""
         while model_selected != "q":
