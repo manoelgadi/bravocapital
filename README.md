@@ -6,10 +6,15 @@ In order to install this package use the following command in your terminal: *su
 
 ###Implementation
 class CleaningAutoClass(builtins.object)
+
 class CleaningManualClass(builtins.object)
+
 class MachineLearningMethods(builtins.object)
+
 class PerformRandForest(builtins.object)
+
 class binningDummyCreattion(builtins.object)
+
 class performPCAAndRatios(builtins.object)
 
 ###Getting started
