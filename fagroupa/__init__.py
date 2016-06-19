@@ -532,7 +532,7 @@ class PerformRandForest:
 
         ncol = df.shape[1]
 
-        X = df.drop('TARGET', axis=1, inplace=True)
+        X = df.drop('TARGET')
         y = df['TARGET']
 
         # Create tree object. As a rule of thumb n_estimators should be equal to the squared number of variables of the dataframe.
@@ -598,7 +598,7 @@ class binningDummyCreattion:
 
                     sumTarget = data[data['binned']==j].ix[:,1].sum()
 
-                    prob =  sumTarget /total
+                    prob = sumTarget /total
 
                     # Applying entropy function
                     entropyList.append(self.calculateEntropy(prob))
@@ -624,7 +624,7 @@ class binningDummyCreattion:
                 break
 
         global binned
-        binned[list(data.columns.values)[0]]  =(pd.qcut(data.ix[:,0], best, labels=False))
+        binned[list(data.columns.values)[0]] = (pd.qcut(data.ix[:, 0], best, labels=False))
 
     def __init__(self, df):
         try:
