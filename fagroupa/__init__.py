@@ -11,7 +11,8 @@ MAX_NUM_ITERATIONS = 10
 NUMBER_OF_K_FOLDS = 5
 
 
-class run:
+class MachineLearningMethods:
+
     def __init__(self):
         model_selected = ""
         while model_selected != "q":
