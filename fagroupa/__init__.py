@@ -6,6 +6,12 @@ from sklearn.kernel_ridge import KernelRidge
 import time
 import pandas as pd
 import re
+import numpy as np
+import scipy.stats
+from sklearn import metrics
+import math
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import scale
 
 MAX_NUM_ITERATIONS = 10
 NUMBER_OF_K_FOLDS = 5
@@ -510,3 +516,53 @@ class CleaningManualClass:
 
             elif user_input == "q":
                 print("Goodbye! Thanks for an amazing course!")
+
+
+class performPCAAndRatios:
+    def __init__(self, df):
+        # Reading the number of variables of the dataframe
+        nrow = df.shape[0]
+        ncol = df.shape[1]
+
+
+        # convert it to numpy arrays
+        X=df.values
+
+        # Scaling the values
+        X = scale(X)
+        pca = PCA(n_components=min(nrow,ncol))
+        pca.fit(X)
+
+        # Finding by which two variables is the variance of the dataset mostly explained
+
+        var = pca.explained_variance_ratio_
+
+        index1 = max(enumerate(var))
+        index1 = list(index1)
+        index1 = index1.pop(0)
+        var2 = np.delete(var, index1)
+        index2 = max(enumerate(var2))
+        index2 = list(index2)
+        index2 = index2.pop(0)
+
+        dframe = pd.DataFrame(data=X)
+
+        # Creating Ratios by executing calculations between these first two variables
+
+        dframe['Addition'] = dframe.iloc[:,index1] + dframe.iloc[:,index2]
+        dframe['Substract'] = dframe.iloc[:,index1] - dframe.iloc[:,index2]
+        dframe['Multiply'] = dframe.iloc[:,index1] * dframe.iloc[:,index2]
+        dframe['Divide'] = dframe.iloc[:,index1] / dframe.iloc[:,index2]
+        dframe['All_1'] = dframe.iloc[:,index1] - dframe.iloc[:,index2] / dframe.iloc[:,index2]
+        dframe['All_2'] = dframe.iloc[:,index1] - dframe.iloc[:,index2] / dframe.iloc[:,index1]
+        dframe['All_3'] = dframe.iloc[:,index1] + dframe.iloc[:,index2] / dframe.iloc[:,index2]
+        dframe['All_4'] = dframe.iloc[:,index1] + dframe.iloc[:,index2] / dframe.iloc[:,index1]
+        dframe['All_5'] = dframe.iloc[:,index1] * dframe.iloc[:,index2] / dframe.iloc[:,index2]
+        dframe['All_6'] = dframe.iloc[:,index1] * dframe.iloc[:,index2] / dframe.iloc[:,index1]
+
+        # merging old dataframe and the transformed one
+        frames = [df,dframe]
+
+        df = pd.concat(frames, axis=1)
+
+        df.to_csv("PCARatiosDataframe.csv", sep=',', encoding='utf-8')
