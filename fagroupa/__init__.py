@@ -6,6 +6,7 @@ from sklearn.kernel_ridge import KernelRidge
 import time
 import pandas as pd
 import re
+from sklearn.ensemble import RandomForestClassifier
 import numpy as np
 import scipy.stats
 from sklearn import metrics
@@ -518,11 +519,156 @@ class CleaningManualClass:
                 print("Goodbye! Thanks for an amazing course!")
 
 
+class PerformRandForest:
+    def __init__(self, df):
+
+        # Check if the user followed the instructions and set the name of the target variable as TARGET
+        try:
+            df['TARGET']
+        except:
+            print("There must be a variable called TARGET in the dataframe in order to run the random forest!")
+
+        # Reading number of variables in the dataframe. Defining X - predictors, Y - target variable.
+
+        ncol = df.shape[1]
+
+        X = df.drop('TARGET', axis=1, inplace=True)
+        y = df['TARGET']
+
+        # Create tree object. As a rule of thumb n_estimators should be equal to the squared number of variables of the dataframe.
+        # Every other variable is at it's default setting tha the user can tweek.
+
+        model = RandomForestClassifier(n_estimators=(ncol**2), criterion='gini', max_features = 'auto', bootstrap = True, max_depth = None)
+
+        # Train the model using the training sets and check score
+        result = model.fit(X, y)
+
+        # Predict Output
+        y_pred = result.predict_proba(X)[:,1]
+
+        # Converting predictions array to datafram. Adding prediction column to the end of the dataframe and renaming it.
+
+        pred = pd.DataFrame(y_pred)
+
+        frames = [df,pred]
+
+        df = pd.concat(frames, axis=1)
+
+        df = df.rename(columns = {0:'Prediction'})
+
+        print("The predicted values have been added at the end of your dataframe under the name #Prediction# ")
+
+        df.to_csv("PerformRandForest.csv", sep=',', encoding='utf-8')
+
+
+class binningDummyCreattion:
+    def calculateEntropy(self, prob):
+
+            entropy = -1*prob*np.log2(prob)
+            return entropy
+
+    def performBinning(self, x):
+
+        # Assign initial value to entropy and best number of bins
+        bestEntropy = 1.0
+        best = 0
+
+        for i in bins:
+            try:
+                data2 = [x, self.df['TARGET']]
+                data = pd.concat(data2, axis=1)
+                try:
+                    data['binned'] = pd.qcut(data.ix[:,0], i, labels=False)
+
+                # In case there is no differenciation
+                except:
+                    data['binned'] = data.ix[:,0]
+
+
+                bindf = pd.DataFrame(index=range(round(float(data.shape[0])/(i+1))), columns=range(i))
+                bindf = bindf.fillna(0)
+
+
+                entropyList = []
+
+                total = data.shape[0]
+
+
+                for j in range(i):
+
+                    sumTarget = data[data['binned']==j].ix[:,1].sum()
+
+                    prob =  sumTarget /total
+
+                    # Applying entropy function
+                    entropyList.append(self.calculateEntropy(prob))
+
+                totEntropy= 0
+
+                # Calculating total Entropy
+                for j in entropyList:
+                    totEntropy = totEntropy + (j/len(entropyList))
+
+                # Checking if new entropy is lower than the previous one
+                if totEntropy < bestEntropy:
+                    print(totEntropy)
+                    bestEntropy = totEntropy
+                    best = i
+
+                    print(best)
+
+                else:
+                    break
+
+            except:
+                break
+
+        global binned
+        binned[list(data.columns.values)[0]]  =(pd.qcut(data.ix[:,0], best, labels=False))
+
+    def __init__(self, df):
+        try:
+            df['TARGET']
+        except:
+            print("There must be a variable called TARGET in the dataframe in order to perform the supervised binning!")
+
+        # Making variable size of bins global so it can be used in the performBinning function also
+
+        global bins
+        bins = [2,5,10,25,50,75,100,150,200,250]
+
+
+        # Splitting dataframe into floats, integers and strings
+
+        df_num = df.select_dtypes(include=[np.float])
+        df_int = df.select_dtypes(include=[np.int])
+        df_string = list(df.select_dtypes(include=[object]))
+
+        # Making variable size of bins global so it can be used in the performBinning function also
+
+        global binned
+        binned = pd.DataFrame()
+
+        # Applying binning function to the num dataframe
+        df_num.apply(self.performBinning,axis =0)
+        binned = binned.ix[:, binned.columns != 'TARGET']
+
+        # Generating dummies
+        df_string = pd.get_dummies(df_string)
+
+        #Merging dataframes
+
+        df2= [binned,df_string]
+        frame = pd.concat(df2, axis=1)
+
+        frame2 = [df_int,frame]
+        df = pd.concat(frame2, axis=1)
+
+        df.to_csv("bin.csv")
+
+
 class performPCAAndRatios:
-    def __init__(self, filename = "./dev.csv"):
-
-        df = pd.read_csv(filename, header=0, index_col=None)
-
+    def __init__(self, df):
         # Reading the number of variables of the dataframe
         nrow = df.shape[0]
         ncol = df.shape[1]
@@ -531,7 +677,7 @@ class performPCAAndRatios:
         # convert it to numpy arrays
         X=df.values
 
-        # Scaling the values
+        #Scaling the values
         X = scale(X)
         pca = PCA(n_components=min(nrow,ncol))
         pca.fit(X)
@@ -564,8 +710,8 @@ class performPCAAndRatios:
         dframe['All_6'] = dframe.iloc[:,index1] * dframe.iloc[:,index2] / dframe.iloc[:,index1]
 
         # merging old dataframe and the transformed one
-        frames = [df,dframe]
+        frames = [df, dframe]
 
         df = pd.concat(frames, axis=1)
 
-        df.to_csv("PCARatiosDataframe.csv", sep=',', encoding='utf-8')
+        df.to_csv("PCA.csv")
