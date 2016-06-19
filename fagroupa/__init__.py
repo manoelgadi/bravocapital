@@ -531,8 +531,8 @@ class PerformRandForest:
         # Reading number of variables in the dataframe. Defining X - predictors, Y - target variable.
 
         ncol = df.shape[1]
-
-        X = df.drop('TARGET',1)
+        print(df.columns.values)
+        X = df.drop(['TARGET'], 1)
         y = df['TARGET']
 
         # Create tree object. As a rule of thumb n_estimators should be equal to the squared number of variables of the dataframe.
