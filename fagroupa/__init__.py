@@ -532,7 +532,7 @@ class PerformRandForest:
 
         ncol = df.shape[1]
 
-        X = df.drop('TARGET')
+        X = df.drop('TARGET',1)
         y = df['TARGET']
 
         # Create tree object. As a rule of thumb n_estimators should be equal to the squared number of variables of the dataframe.
