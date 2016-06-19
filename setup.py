@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='fagroupa',
-      version='0.15',
+      version='0.16',
       description='Try many sklearn algorithms in no time!',
       url='https://github.com/martinmaseda/fagroupa',
       author='Ivan Martin Maseda',
