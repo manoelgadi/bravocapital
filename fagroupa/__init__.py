@@ -519,7 +519,10 @@ class CleaningManualClass:
 
 
 class performPCAAndRatios:
-    def __init__(self, df):
+    def __init__(self, filename = "./dev.csv"):
+
+        df = pd.read_csv(filename, header=0, index_col=None)
+
         # Reading the number of variables of the dataframe
         nrow = df.shape[0]
         ncol = df.shape[1]
