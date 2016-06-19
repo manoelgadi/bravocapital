@@ -8,9 +8,6 @@ import pandas as pd
 import re
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
-import scipy.stats
-from sklearn import metrics
-import math
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import scale
 
