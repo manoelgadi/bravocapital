@@ -187,7 +187,7 @@ class run:
 
 class CleaningAutoClass:
 
-    def cleanDataAuto(self, tr_filepath = "./dev.csv"):
+    def __init__(self, tr_filepath = "./dev.csv"):
         # Import data
         print("Reading in data...")
         df = pd.read_csv(tr_filepath, header=0, index_col=None)
@@ -454,7 +454,7 @@ class CleaningManualClass:
         print("End of deleting outliers section")
         return df
 
-    def mainMenu(self, filename = "./dev.csv"):
+    def __init__(self, filename = "./dev.csv"):
         user_input = ""
         dfOriginal = pd.read_csv(filename, header=0, index_col=None)
         cleanDataFrame = dfOriginal
@@ -464,7 +464,7 @@ class CleaningManualClass:
             print("2) Please press 2 if you want to clean outliers")
             print("3) Please press 3 if you want to save the clean dataframe in a new file")
             print("4) Please press 'q' if you want to quit without saving")
-            user_input = raw_input("Please select option: ")
+            user_input = input("Please select option: ")
             if user_input == "1":
                 second_user_input = ""
                 while second_user_input != "q":
@@ -473,7 +473,7 @@ class CleaningManualClass:
                     print("c) Please press 'c' if you want to replace them with 0s")
                     print("d) Please press 'd' if you want to replace them with the median")
                     print("e) Please press 'q' if you want to go back to the main menu")
-                    second_user_input = raw_input("Please select an option: ")
+                    second_user_input = input("Please select an option: ")
 
                     if (second_user_input == "a"):
                        print(self.countNas(cleanDataFrame))
@@ -492,7 +492,7 @@ class CleaningManualClass:
                     print("b) Please press 'b' if you want to delete existing Outliers")
                     print("c) Please press 'c' if you want to replace them with Maximum/Minimum depending on the value")
                     print("e) Please press 'q' if you want to go back to the main menu")
-                    third_user_input = raw_input("Please select an option: ")
+                    third_user_input = input("Please select an option: ")
 
                     if (third_user_input == "a"):
                         self.countOutliers(cleanDataFrame)
