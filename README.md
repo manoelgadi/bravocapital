@@ -34,6 +34,7 @@ Group A!
     
 
 All your code should be vectorized (do fast calculations when using pandas data frame [-0.5 points for each method that is not]). -> DONE!
+
 0.5 bonus points: Your group may get an extra 0.5 points if ALL of your algorithm harness the power of multiple-core CPUs -> Almost done for all methods. Not all methods from sklearn can be parallelized, the ones which allow this option have been set to the n_jobs=-1 which will force the library to use as many cores as possible during training. 
 
 Please use the two datasets from exercise 1 and 2 to test your code, because those will be the onces I will use to test.
