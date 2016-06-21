@@ -1,11 +1,11 @@
 from setuptools import setup
 
-setup(name='fagroupa',
-      version='0.28',
-      description='Try many sklearn algorithms in no time!',
-      url='https://github.com/martinmaseda/fagroupa',
-      author='Ivan Martin Maseda',
-      author_email='ivan.martin@student.ie.edu',
+setup(name='bravocapital',
+      version='0.1',
+      description='Python package for Bravo Capital!',
+      url='https://github.com/manoelgadi/bravocapital/fagroupa',
+      author='Manoel Gadi',
+      author_email='manoel.gadi@bravocapital.es',
       license='MIT',
-      packages=['fagroupa'],
+      packages=['bravocapital'],
       zip_safe=False)
