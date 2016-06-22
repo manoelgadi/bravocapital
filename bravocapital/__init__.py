@@ -1,9 +1,11 @@
-def safechars():
-	return 1
+from .safechars import safe_upperstr
+from .safechars import safe_chars_nombrepersona
+from .safechars import safe_upperstr_razonsocial
+
 
 def imprime():
-	return 2
+	return 3
 
-def sumauno(valor):
-	return valor+1
+def sumados(valor):
+	return valor+2
 
