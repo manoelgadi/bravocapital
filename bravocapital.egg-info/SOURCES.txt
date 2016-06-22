@@ -1,0 +1,8 @@
+setup.cfg
+setup.py
+bravocapital/__init__.py
+bravocapital.egg-info/PKG-INFO
+bravocapital.egg-info/SOURCES.txt
+bravocapital.egg-info/dependency_links.txt
+bravocapital.egg-info/not-zip-safe
+bravocapital.egg-info/top_level.txt
