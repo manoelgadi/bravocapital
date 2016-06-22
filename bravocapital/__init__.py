@@ -1,12 +1,11 @@
+import string
+
 def imprime():
 	return 3
 
 def sumados(valor):
 	return valor+2
 
-
-import string
- 
 def normalize(s):
     for p in string.punctuation:
         s = s.replace(p, '')
