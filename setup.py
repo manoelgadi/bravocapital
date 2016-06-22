@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='bravocapital',
-      version='0.1',
+      version='0.2',
       description='Python package for Bravo Capital!',
       url='https://github.com/manoelgadi/bravocapital/bravocapital',
       author='Manoel Gadi',
