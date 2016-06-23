@@ -1,0 +1,8 @@
+setup.cfg
+setup.py
+fambd2015b/__init__.py
+fambd2015b.egg-info/PKG-INFO
+fambd2015b.egg-info/SOURCES.txt
+fambd2015b.egg-info/dependency_links.txt
+fambd2015b.egg-info/not-zip-safe
+fambd2015b.egg-info/top_level.txt

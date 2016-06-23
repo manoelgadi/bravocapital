@@ -1,11 +1,11 @@
 from setuptools import setup
 
-setup(name='bravocapital',
+setup(name='fambd2015b',
       version='0.2',
-      description='Python package for Bravo Capital!',
-      url='https://github.com/manoelgadi/bravocapital/bravocapital',
-      author='Manoel Gadi',
-      author_email='manoel.gadi@bravocapital.es',
+      description='Python package for Financial Analytics!',
+      url='https://github.com/my13/fa_mbd_2015b',
+      author='TEAM B - Master Big Data',
+      author_email='jldelgadodavara@student.ie.edu',
       license='MIT',
-      packages=['bravocapital'],
+      packages=['fambd2015b'],
       zip_safe=False)
