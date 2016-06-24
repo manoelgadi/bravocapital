@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
+"""
+Created on Wed Nov 18 10:16:03 2015
+
+@author: mgadi
+"""
+
 import string
-
-def imprime():
-	return 3
-
-def sumados(valor):
-	return valor+2
-
+ 
 def normalize(s):
     for p in string.punctuation:
         s = s.replace(p, '')
