@@ -12,6 +12,7 @@ import statsmodels.robust.scale as sm
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import scale
 from sklearn.tree import DecisionTreeRegressor
+import re
 
 legalchars = "abcdefghijklmnopqrstuvwxyx1234567890"
 replace = (
@@ -283,3 +284,8 @@ def GeneticLogisticRegression(df, output_var):
 
     return parameters
 
+def get_features(s):
+    width = 3
+    s = s.lower()
+    s = re.sub(r'[^\w]+', '', s)
+    return [s[i:i + width] for i in range(max(len(s) - width + 1, 1))]
