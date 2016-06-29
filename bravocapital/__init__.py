@@ -289,3 +289,18 @@ def get_features(s):
     s = s.lower()
     s = re.sub(r'[^\w]+', '', s)
     return [s[i:i + width] for i in range(max(len(s) - width + 1, 1))]
+
+def neo4j_create_relationship_director(graph,node1,node2):
+    query1="""MATCH (n{BravoKey:"%s"}),(m{BravoKey:"%s"}) CREATE (n)-[r:DIRECTOR]->(m) """
+    myquery = query1 % ('V'+node1,'V'+node2)
+    graph.cypher.execute(myquery)
+
+def neo4j_create_relationship_accionista(graph,node1,node2,porcentaje):
+    query1="""MATCH (n{BravoKey:"%s"}),(m{BravoKey:"%s"}) CREATE (n)-[r:ACCIONISTA]->(m) SET r.porcentaje="%s" """
+    myquery = query1 % ('V'+node1,'V'+node2,porcentaje)
+    graph.cypher.execute(myquery)
+
+def neo4j_delete_graph(graph,ui):    
+    query1="""MATCH (n{userID:"%s"})<-[r]-m DELETE n,r,m """
+    myquery = query1 % (ui)
+    graph.cypher.execute(myquery)
