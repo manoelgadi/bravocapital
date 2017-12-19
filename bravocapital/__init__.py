@@ -230,7 +230,7 @@ def GeneticLogisticRegression(df, output_var):
     a=0
     while OK:  #REPEAT UNTIL IT DO NOT IMPROVE, AT LEAST A LITLE, THE GINI IN 2 GENERATIONS
         a=a+1
-        print 'loop ', a
+        print ('loop ', a)
         OK=0
 
         # GENERATING OFFSPRING
@@ -269,17 +269,17 @@ def GeneticLogisticRegression(df, output_var):
             sum_current_gini+=gini
           
         #HAS IT IMPROVED AT LEAST A LITLE THE GINI IN THE LAST 2 GENERATIONS
-        print 'sum_current_gini=', sum_current_gini, 'sum_current_gini_1=', sum_current_gini_1, 'sum_current_gini_2=', sum_current_gini_2
+        print ('sum_current_gini=', sum_current_gini, 'sum_current_gini_1=', sum_current_gini_1, 'sum_current_gini_2=', sum_current_gini_2)
         if(sum_current_gini>sum_current_gini_1+0.0001 or sum_current_gini>sum_current_gini_2+0.0001):
             OK=1
 
     gini=list_gini[0] 
     parameters=dic_gini[list_gini[0]]
-    print parameters
+    print (parameters)
     
     # PRINTING OUT THE LIST OF FEATURES
     for i in range(len(parameters)):
-        print 'Parameter', list(df2.columns)[i], ':', parameters[i] 
+        print ('Parameter', list(df2.columns)[i], ':', parameters[i])
     #print 'gini: ', gini
 
     return parameters
